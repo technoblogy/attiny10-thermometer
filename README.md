@@ -1,2 +1,2 @@
-# attiny10-thermometer
-A thermometer based on an ATtiny10 that displays the temperature on an LED.
+# ATtiny10 Thermometer
+A small battery-powered thermometer based on an ATtiny10 and a DS18B20 temperature sensor that displays the temperature as a series of red and green flashes in binary on a bi-colour LED.
