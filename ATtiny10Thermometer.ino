@@ -1,15 +1,13 @@
-/* ATtiny10 Thermometer
+/* ATtiny10 Thermometer v2 - see http://www.technoblogy.com/show?2G8A
 
-   David Johnson-Davies - www.technoblogy.com - 24th January 2019
-   ATtiny10
+   David Johnson-Davies - www.technoblogy.com - 7th March 2021
+   ATtiny10 @ 1MHz (internal oscillator)
    
    CC BY 4.0
    Licensed under a Creative Commons Attribution 4.0 International license: 
    http://creativecommons.org/licenses/by/4.0/
 */
 
-#include <avr/io.h>
-#include <stdint.h>
 #include <avr/sleep.h>
 #include <avr/interrupt.h>
 
@@ -189,13 +187,9 @@ void setup() {
 
 // Flash temperature using "Easy Binary"
 void loop () {
-  for (;;) {
- DisplayError(GreenPin);
- DisplayError(RedPin);
-  }
-}
-
-int main (void) {
-  setup();
-  loop();
+  WDDelay(9);                       // 8 second delay
+  WDDelay(9);                       // and another 8 second delay;
+  int temp = Temperature();         // In sixteenths of a degree
+  if (temp < 0) { Pulse(GreenPin); temp = -temp; }
+  Flash(temp>>4);
 }
